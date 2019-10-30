@@ -101,10 +101,10 @@ namespace SeaBattle
         public void SetShipDestroyed(int row, int column, int direction)
         {
             int tempRow, tempColumn;
-            for (int i = 0; i < 10; ++i)
+            for (int i = 0; i < 9; ++i)
             {
-                tempRow = i % 3;
-                tempColumn = i / 3;
+                tempRow = row - 1 + i % 3;
+                tempColumn = column - 1 + i / 3;
                 if (CheckBounds(tempRow, tempColumn))
                 {
                     if (GetCell(tempRow, tempColumn).Equals(CellStatus.ClosedEmpty))
@@ -182,7 +182,7 @@ namespace SeaBattle
                         {
                             if (GetCell(row , column - 1).Equals(CellStatus.Ship))
                             {
-                                SetShipDestroyed(row, column, -2);
+                                SetShipDestroyed(row, column - 1, -2);
                             }
                         }
                         break;
@@ -193,13 +193,13 @@ namespace SeaBattle
         public bool CheckShipDestroyed(int row, int column, int direction)
         {
             int tempRow, tempColumn;
-            for (int i = 0; i < 10; ++i)
+            for (int i = 0; i < 9; ++i)
             {
-                tempRow = i % 3;
-                tempColumn = i / 3;
-                if (!(tempColumn == column && tempRow == row) && CheckBounds(tempRow, tempColumn))
+                tempRow = row - 1 + i % 3;
+                tempColumn = column - 1 + i / 3;
+                if (i != 4 && CheckBounds(tempRow, tempColumn))
                 {
-                    if (GetCell(tempRow, tempColumn).Equals(CellStatus.ClosedShip))
+                    if (GetCell(tempRow, tempColumn) == CellStatus.ClosedShip)
                     {
                         return false;
                     }
@@ -275,7 +275,7 @@ namespace SeaBattle
                         {
                             if (GetCell(row , column - 1).Equals(CellStatus.Ship))
                             {
-                                fl3 = CheckShipDestroyed(row, column, -2);
+                                fl3 = CheckShipDestroyed(row, column - 1, -2);
                             }
                         }
                         break;
