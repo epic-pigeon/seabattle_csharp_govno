@@ -75,6 +75,16 @@ namespace SeaBattle
             board.Rows[row][column] = status;
         }
 
+        public bool CheckAllShipsDestroyed()
+        {
+            for (int i = 0; i < Size * Size; i++)
+            {
+                if (GetCell(i / Size, i % Size) == CellStatus.ClosedShip) return false;
+            }
+
+            return true;
+        }
+
         public CellStatus GetCell(int row, int column)
         {
             return (CellStatus) board.Rows[row][column];
@@ -92,7 +102,7 @@ namespace SeaBattle
                 SetCell(row, column, CellStatus.Ship);
                 if (CheckShipDestroyed(row, column, 0))
                 {
-                    Console.WriteLine("kar");
+                    //Console.WriteLine("kar");
                     SetShipDestroyed(row, column, 0);
                 }
             }

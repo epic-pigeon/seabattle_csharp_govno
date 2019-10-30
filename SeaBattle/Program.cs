@@ -16,6 +16,12 @@ namespace SeaBattle  {
             board1.Shoot(1, 3);
             //board1.Shoot(1, 4);
             //Console.WriteLine(Board.CellStatus.Empty.Equals(Board.CellStatus.Empty));
+            ShipArrangement.Random.Apply(board2);
+            board2.Shoot(0, 0);
+            board2.Shoot(7, 0);
+            board2.Shoot(3, 3);
+            board2.Shoot(3, 4);
+            board2.Shoot(3, 5);
             SeaBattle.DrawBoards(board1, board2);
         }
     }
