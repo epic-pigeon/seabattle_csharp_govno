@@ -90,8 +90,199 @@ namespace SeaBattle
             else if (GetCell(row, column) == CellStatus.ClosedShip)
             {
                 SetCell(row, column, CellStatus.Ship);
-                
+                if (CheckShipDestroyed(row, column, 0))
+                {
+                    Console.WriteLine("kar");
+                    SetShipDestroyed(row, column, 0);
+                }
             }
+        }
+
+        public void SetShipDestroyed(int row, int column, int direction)
+        {
+            int tempRow, tempColumn;
+            for (int i = 0; i < 10; ++i)
+            {
+                tempRow = i % 3;
+                tempColumn = i / 3;
+                if (CheckBounds(tempRow, tempColumn))
+                {
+                    if (GetCell(tempRow, tempColumn).Equals(CellStatus.ClosedEmpty))
+                    {
+                        SetCell(tempRow, tempColumn, CellStatus.Empty);
+                    }
+                }
+            }
+
+            if (direction == 0)
+            {
+                
+                if (CheckBounds(row - 1, column))
+                {
+                    if (GetCell(row - 1, column).Equals(CellStatus.Ship))
+                    {
+                        SetShipDestroyed(row - 1, column, -1);
+                    }
+                }
+                if (CheckBounds(row + 1, column))
+                {
+                    if (GetCell(row + 1, column).Equals(CellStatus.Ship))
+                    {
+                        SetShipDestroyed(row + 1, column, 1);
+                    }
+                }
+                if (CheckBounds(row, column - 1))
+                {
+                    if (GetCell(row , column - 1).Equals(CellStatus.Ship))
+                    {
+                        SetShipDestroyed(row, column, -2);
+                    }
+                }
+                if (CheckBounds(row, column + 1))
+                {
+                    if (GetCell(row, column + 1).Equals(CellStatus.Ship))
+                    {
+                        SetShipDestroyed(row, column + 1, 2);
+                    }
+                }
+            }
+            else
+            {
+                switch (direction)
+                {
+                    case 1:
+                        if (CheckBounds(row + 1, column))
+                        {
+                            if (GetCell(row + 1, column).Equals(CellStatus.Ship))
+                            {
+                                SetShipDestroyed(row + 1, column, 1);
+                            }
+                        } 
+                        break;
+                    case -1:
+                        if (CheckBounds(row - 1, column))
+                        {
+                            if (GetCell(row - 1, column).Equals(CellStatus.Ship))
+                            {
+                                SetShipDestroyed(row - 1, column, -1);
+                            }
+                        } 
+                        break;
+                    case 2:
+                        if (CheckBounds(row, column + 1))
+                        {
+                            if (GetCell(row, column + 1).Equals(CellStatus.Ship))
+                            {
+                                SetShipDestroyed(row, column + 1, 2);
+                            }
+                        }
+                        break;
+                    case -2:
+                        if (CheckBounds(row, column - 1))
+                        {
+                            if (GetCell(row , column - 1).Equals(CellStatus.Ship))
+                            {
+                                SetShipDestroyed(row, column, -2);
+                            }
+                        }
+                        break;
+                }
+            }
+        }
+
+        public bool CheckShipDestroyed(int row, int column, int direction)
+        {
+            int tempRow, tempColumn;
+            for (int i = 0; i < 10; ++i)
+            {
+                tempRow = i % 3;
+                tempColumn = i / 3;
+                if (!(tempColumn == column && tempRow == row) && CheckBounds(tempRow, tempColumn))
+                {
+                    if (GetCell(tempRow, tempColumn).Equals(CellStatus.ClosedShip))
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            bool fl1 = true, fl2 = true, fl3 = true, fl4 = true;
+            if (direction == 0)
+            {
+                
+                if (CheckBounds(row - 1, column))
+                {
+                    if (GetCell(row - 1, column).Equals(CellStatus.Ship))
+                    {
+                        fl1 = CheckShipDestroyed(row - 1, column, -1);
+                    }
+                }
+                if (CheckBounds(row + 1, column))
+                {
+                    if (GetCell(row + 1, column).Equals(CellStatus.Ship))
+                    {
+                        fl2 = CheckShipDestroyed(row + 1, column, 1);
+                    }
+                }
+                if (CheckBounds(row, column - 1))
+                {
+                    if (GetCell(row , column - 1).Equals(CellStatus.Ship))
+                    {
+                        fl3 = CheckShipDestroyed(row, column, -2);
+                    }
+                }
+                if (CheckBounds(row, column + 1))
+                {
+                    if (GetCell(row, column + 1).Equals(CellStatus.Ship))
+                    {
+                        fl4 = CheckShipDestroyed(row, column + 1, 2);
+                    }
+                }
+            }
+            else
+            {
+                switch (direction)
+                {
+                    case 1:
+                        if (CheckBounds(row + 1, column))
+                        {
+                            if (GetCell(row + 1, column).Equals(CellStatus.Ship))
+                            {
+                                fl2 = CheckShipDestroyed(row + 1, column, 1);
+                            }
+                        } 
+                        break;
+                    case -1:
+                        if (CheckBounds(row - 1, column))
+                        {
+                            if (GetCell(row - 1, column).Equals(CellStatus.Ship))
+                            {
+                                fl1 = CheckShipDestroyed(row - 1, column, -1);
+                            }
+                        } 
+                        break;
+                    case 2:
+                        if (CheckBounds(row, column + 1))
+                        {
+                            if (GetCell(row, column + 1).Equals(CellStatus.Ship))
+                            {
+                                fl4 = CheckShipDestroyed(row, column + 1, 2);
+                            }
+                        }
+                        break;
+                    case -2:
+                        if (CheckBounds(row, column - 1))
+                        {
+                            if (GetCell(row , column - 1).Equals(CellStatus.Ship))
+                            {
+                                fl3 = CheckShipDestroyed(row, column, -2);
+                            }
+                        }
+                        break;
+                }
+            }
+
+            return fl1 && fl2 && fl3 && fl4;
         }
 
         public bool CheckBounds(int row, int column)
