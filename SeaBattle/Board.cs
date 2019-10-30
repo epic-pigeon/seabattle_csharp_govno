@@ -85,6 +85,24 @@ namespace SeaBattle
             return true;
         }
 
+        public void Reveal()
+        {
+            for (int row = 0; row < Size; row++)
+            {
+                for (int column = 0; column < Size; column++)
+                {
+                    if (GetCell(row, column) == CellStatus.ClosedEmpty)
+                    {
+                        SetCell(row, column, CellStatus.Empty);
+                    }
+                    if (GetCell(row, column) == CellStatus.ClosedShip)
+                    {
+                        SetCell(row, column, CellStatus.Ship);
+                    }
+                }
+            }
+        }
+
         public CellStatus GetCell(int row, int column)
         {
             return (CellStatus) board.Rows[row][column];

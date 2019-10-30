@@ -45,7 +45,7 @@ namespace SeaBattle
             get
             {
                 int random = new Random().Next(5);
-                if (random == 0)
+                if (true)
                 {
                     return new ShipArrangement(new List<Ship>
                     {
