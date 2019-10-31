@@ -120,6 +120,17 @@ namespace SeaBattle
                 }
             }
         }
+        
+        public void Reset()
+        {
+            for (int row = 0; row < Size; row++)
+            {
+                for (int column = 0; column < Size; column++)
+                {
+                    SetCell(row, column, CellStatus.ClosedEmpty);
+                }
+            }
+        }
 
         public CellStatus GetCell(int row, int column)
         {

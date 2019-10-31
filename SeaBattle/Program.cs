@@ -70,6 +70,7 @@ namespace SeaBattle  {
                     while (true)
                     {
                         Console.Clear();
+                        currentBoard.Reset();
                         ShipArrangement.Random.Apply(currentBoard);
                         currentBoard.Reveal();
                         SeaBattle.DrawBoards(currentBoard);
