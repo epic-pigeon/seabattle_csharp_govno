@@ -29,7 +29,7 @@ namespace SeaBattle
             public int Size => size;
         }
 
-        private enum Direction
+        public enum Direction
         {
             Up, Down, Left, Right
         }
@@ -59,6 +59,103 @@ namespace SeaBattle
 
                 return null;
             }
+        }
+        
+        public static ShipArrangement Empty => new ShipArrangement(new List<Ship>());
+
+        public bool Add(int row, int column, Direction direction, int size)
+        {
+            if (0 > row || row >= Board.Size || 0 > column || column >= Board.Size)
+            {
+                return false;
+            }
+
+            switch (direction)
+            {
+                case Direction.Down:
+                    if (0 > (row + size - 1) || (row + size - 1) >= Board.Size)
+                    {
+                        return false;
+                    }
+                    break;
+                case Direction.Up:
+                    if (0 > (row - size + 1) || (row - size + 1) >= Board.Size)
+                    {
+                        return false;
+                    }
+                    break;
+                case Direction.Left:
+                    if (0 > (column - size + 1) || (column - size + 1) >= Board.Size)
+                    {
+                        return false;
+                    }
+                    break;
+                case Direction.Right:
+                    if (0 > (column + size - 1) || (column + size - 1) >= Board.Size)
+                    {
+                        return false;
+                    }
+                    break;
+            }
+            
+            // TODO
+            foreach (var ship in ships)
+            {
+                for (int i = 0; i < ship.Size; i++)
+                {
+                    for (int j = 0; j < size; j++)
+                    {
+                        int shipRow, shipColumn, currentRow, currentColumn;
+                        shipRow = shipColumn = currentRow = currentColumn = 0;
+                        switch (ship.Direction)
+                        {
+                            case Direction.Down:
+                                shipRow = ship.Row + i;
+                                shipColumn = ship.Column;
+                                break;
+                            case Direction.Up:
+                                shipRow = ship.Row - i;
+                                shipColumn = ship.Column;
+                                break;
+                            case Direction.Left:
+                                shipRow = ship.Row;
+                                shipColumn = ship.Column - i;
+                                break;
+                            case Direction.Right:
+                                shipRow = ship.Row;
+                                shipColumn = ship.Column + i;
+                                break;
+                        }
+                        switch (direction)
+                        {
+                            case Direction.Down:
+                                currentRow = row + i;
+                                currentColumn = column;
+                                break;
+                            case Direction.Up:
+                                currentRow = row - i;
+                                currentColumn = column;
+                                break;
+                            case Direction.Left:
+                                currentRow = row;
+                                currentColumn = column - i;
+                                break;
+                            case Direction.Right:
+                                currentRow = row;
+                                currentColumn = column + i;
+                                break;
+                        }
+
+                        if (Math.Abs(shipRow - currentRow) < 2 && Math.Abs(shipColumn - currentColumn) < 2)
+                        {
+                            return false;
+                        }
+                    }
+                }
+            }
+
+            ships.Add(new Ship(row, column, direction, size));
+            return true;
         }
 
         public void Apply(Board board)

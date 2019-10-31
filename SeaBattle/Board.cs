@@ -46,7 +46,7 @@ namespace SeaBattle
             return result;
         }
 
-        public const int Size = 8;
+        public const int Size = 10;
 
         private DataTable board;
 
@@ -98,6 +98,24 @@ namespace SeaBattle
                     if (GetCell(row, column) == CellStatus.ClosedShip)
                     {
                         SetCell(row, column, CellStatus.Ship);
+                    }
+                }
+            }
+        }
+        
+        public void Hide()
+        {
+            for (int row = 0; row < Size; row++)
+            {
+                for (int column = 0; column < Size; column++)
+                {
+                    if (GetCell(row, column) == CellStatus.Empty)
+                    {
+                        SetCell(row, column, CellStatus.ClosedEmpty);
+                    }
+                    if (GetCell(row, column) == CellStatus.Ship)
+                    {
+                        SetCell(row, column, CellStatus.ClosedShip);
                     }
                 }
             }

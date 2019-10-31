@@ -10,11 +10,19 @@ namespace SeaBattle {
                     for (int j = -1; j < Board.Size; j++) {
                         if (i == -1)
                         {
-                            if (j == -1) Console.Write(" "); else Console.Write((char) ('A' + j));
+                            if (j == -1) Console.Write("  "); else Console.Write((char) ('A' + j));
                         }
                         else
                         {
-                            if (j == -1) Console.Write(i + 1);
+                            if (j == -1)
+                            {
+                                if (("" + (i + 1)).Length < 2)
+                                {
+                                    Console.Write(" ");
+                                }
+
+                                Console.Write(i + 1);
+                            }
                             else
                             {
                                 board.PrintCell(i, j);
