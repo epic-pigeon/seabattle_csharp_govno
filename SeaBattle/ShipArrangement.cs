@@ -45,18 +45,82 @@ namespace SeaBattle
             get
             {
                 int random = new Random().Next(5);
-                if (true)
+                if (random == 0)
                 {
                     return new ShipArrangement(new List<Ship>
                     {
-                        new Ship(0, 0, Direction.Right, 1),
+                        new Ship(0, 1, Direction.Right, 1),
+                        new Ship(4, 3, Direction.Right, 1),
+                        new Ship(9, 4, Direction.Right, 1),
+                        new Ship(6, 5, Direction.Right, 1),
+                        new Ship(5, 0, Direction.Down, 2),
+                        new Ship(4, 6, Direction.Right, 2),
+                        new Ship(8, 0, Direction.Right, 2),
+                        new Ship(8, 7, Direction.Right, 3),
+                        new Ship(3, 9, Direction.Down, 3),
+                        new Ship(1, 5, Direction.Right, 4),
+                    });
+                }else if (random == 1)
+                {
+                    return new ShipArrangement(new List<Ship>
+                    {
+                        new Ship(1, 1, Direction.Right, 1),
                         new Ship(7, 0, Direction.Right, 1),
-                        new Ship(0, 7, Direction.Right, 1),
-                        new Ship(3, 3, Direction.Right, 3),
-                        new Ship(7, 7, Direction.Right, 1),
+                        new Ship(4, 2, Direction.Right, 1),
+                        new Ship(3, 5, Direction.Right, 1),
+                        new Ship(5, 5, Direction.Down, 2),
+                        new Ship(1, 6, Direction.Right, 2),
+                        new Ship(3, 7, Direction.Down, 2),
+                        new Ship(9, 6, Direction.Right, 3),
+                        new Ship(5, 9, Direction.Down, 3),
+                        new Ship(0, 9, Direction.Down, 4),
+                    });
+                }else if (random == 2)
+                {
+                    return new ShipArrangement(new List<Ship>
+                    {
+                        new Ship(9, 0, Direction.Right, 1),
+                        new Ship(8, 3, Direction.Right, 1),
+                        new Ship(8, 5, Direction.Right, 1),
+                        new Ship(5, 6, Direction.Right, 1),
+                        new Ship(0, 0, Direction.Right, 2),
+                        new Ship(8, 8, Direction.Down, 2),
+                        new Ship(2, 9, Direction.Down, 2),
+                        new Ship(4, 1, Direction.Down, 3),
+                        new Ship(0, 3, Direction.Down, 3),
+                        new Ship(0, 6, Direction.Right, 4),
+                    });
+                }else if (random == 3)
+                {
+                    return new ShipArrangement(new List<Ship>
+                    {
+                        new Ship(2, 0, Direction.Right, 1),
+                        new Ship(7, 0, Direction.Right, 1),
+                        new Ship(9, 4, Direction.Right, 1),
+                        new Ship(5, 9, Direction.Right, 1),
+                        new Ship(4, 0, Direction.Down, 2),
+                        new Ship(2, 9, Direction.Down, 2),
+                        new Ship(9, 1, Direction.Right, 2),
+                        new Ship(0, 6, Direction.Right, 3),
+                        new Ship(9, 6, Direction.Right, 3),
+                        new Ship(0, 1, Direction.Right, 4),
+                    });
+                }else if (random == 4)
+                {
+                    return new ShipArrangement(new List<Ship>
+                    {
+                        new Ship(0, 6, Direction.Right, 1),
+                        new Ship(7, 8, Direction.Right, 1),
+                        new Ship(9, 9, Direction.Right, 1),
+                        new Ship(9, 7, Direction.Right, 1),
+                        new Ship(1, 0, Direction.Down, 2),
+                        new Ship(7, 4, Direction.Down, 2),
+                        new Ship(0, 8, Direction.Down, 2),
+                        new Ship(6, 0, Direction.Right, 3),
+                        new Ship(4, 6, Direction.Right, 3),
+                        new Ship(1, 4, Direction.Down, 4),
                     });
                 }
-
                 return null;
             }
         }
